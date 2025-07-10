@@ -1,10 +1,11 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
-import { CustomCursor } from '@/components/CustomCursor';
 import { ScrollIndicator } from '@/components/ScrollIndicator';
-import { Navigation } from '@/components/Navigation';
+import { LiquidNavigation } from '@/components/animations/LiquidNavigation';
 import { Footer } from '@/components/Footer';
+import { LiquidCoffeeBackground } from '@/components/backgrounds/LiquidCoffeeBackground';
+import { CoffeeWaveBackground } from '@/components/animations/CoffeeWaveBackground';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
@@ -40,9 +41,10 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        <CustomCursor />
+        <LiquidCoffeeBackground />
+        <CoffeeWaveBackground />
         <ScrollIndicator />
-        <Navigation />
+        <LiquidNavigation />
         <main id="main-content" role="main">
           {children}
         </main>

@@ -7,6 +7,8 @@ import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { SteamEffect } from '@/components/animations/SteamEffect';
 import { TextReveal } from '@/components/animations/TextReveal';
+import { MorphingButton } from '@/components/animations/MorphingButton';
+import { Coffee, BookOpen } from 'lucide-react';
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -68,21 +70,22 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 2 }}
           className="space-x-4"
         >
-          <Button
+          <MorphingButton
+            icon={Coffee}
+            variant="primary"
             size="lg"
-            className="bg-coffee-brown hover:bg-coffee-dark text-cream px-8 py-3 text-lg"
             onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Explore Our Menu
-          </Button>
-          <Button
-            size="lg"
+          </MorphingButton>
+          <MorphingButton
+            icon={BookOpen}
             variant="outline"
-            className="border-cream text-cream hover:bg-cream hover:text-coffee-brown px-8 py-3 text-lg"
+            size="lg"
             onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Our Story
-          </Button>
+          </MorphingButton>
         </motion.div>
       </motion.div>
 

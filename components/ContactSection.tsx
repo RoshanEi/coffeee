@@ -6,6 +6,7 @@ import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { MorphingButton } from '@/components/animations/MorphingButton';
 
 export function ContactSection() {
   const ref = useRef(null);
@@ -142,13 +143,15 @@ export function ContactSection() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Button
+                <MorphingButton
+                  icon={Send}
                   type="submit"
-                  className="w-full bg-gold hover:bg-gold-dark text-coffee-brown font-semibold py-3"
+                  variant="secondary"
+                  size="lg"
+                  className="w-full"
                 >
-                  <Send className="h-5 w-5 mr-2" />
                   Send Message
-                </Button>
+                </MorphingButton>
               </motion.div>
             </form>
           </motion.div>

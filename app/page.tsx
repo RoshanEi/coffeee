@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -13,7 +13,8 @@ import { ContactSection } from '@/components/ContactSection';
 import { SmartRecommendations } from '@/components/ai/SmartRecommendations';
 import { CoffeeCustomizer } from '@/components/interactive/CoffeeCustomizer';
 import { VirtualTour } from '@/components/interactive/VirtualTour';
-import { ParticleSystem } from '@/components/animations/ParticleSystem';
+import { SteamParticleSystem } from '@/components/animations/SteamParticleSystem';
+import { CoffeeStainEffect } from '@/components/animations/CoffeeStainEffect';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +22,7 @@ export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const [showStains, setShowStains] = useState(false);
   
   // Mock user preferences for AI recommendations
   const userPreferences = {
@@ -63,6 +65,15 @@ export default function Home() {
     };
   }, []);
 
+  // Trigger coffee stains periodically
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowStains(prev => !prev);
+    }, 8000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div ref={containerRef} className="relative overflow-hidden">
       {/* Parallax background */}
@@ -73,10 +84,14 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-cream via-coffee-light/20 to-coffee-brown/10" />
       </motion.div>
 
-      {/* Floating coffee beans */}
-      <div className="fixed inset-0 -z-5 pointer-events-none">
-        <ParticleSystem type="coffee-beans" count={8} />
+      {/* Steam effects */}
+      <div className="fixed inset-0 -z-5 pointer-events-none overflow-hidden">
+        <SteamParticleSystem isActive={true} intensity={1.5} sourceX={20} sourceY={90} />
+        <SteamParticleSystem isActive={true} intensity={1} sourceX={80} sourceY={85} />
       </div>
+      
+      {/* Coffee stain effects */}
+      <CoffeeStainEffect trigger={showStains} maxStains={3} />
 
       {/* Main content */}
       <HeroSection />
