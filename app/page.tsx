@@ -21,7 +21,6 @@ import { WebGL3DCoffee } from '@/components/advanced/WebGL3DCoffee';
 import { AdvancedAIRecommendations } from '@/components/advanced/AdvancedAIRecommendations';
 import { ImmersiveAudioExperience } from '@/components/advanced/ImmersiveAudioExperience';
 import { PerformanceMonitor } from '@/components/advanced/PerformanceMonitor';
-import { Navigation } from '@/components/Navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -157,9 +156,6 @@ export default function Home() {
       <section className="scroll-section">
         <ContactSection />
       </section>
-      
-      {/* Navigation Component */}
-      <Navigation />
     </div>
   );
 }
