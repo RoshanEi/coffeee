@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ShoppingCart, Star, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -31,6 +31,12 @@ export function ProductCard3D({
 }: ProductCard3DProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // Set isClient to true after hydration
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -64,6 +70,74 @@ export function ProductCard3D({
     setIsHovered(false);
   };
 
+  // If not client-side yet, render a simpler version to avoid hydration mismatch
+  if (!isClient) {
+    return (
+      <div className="relative bg-white rounded-xl shadow-lg overflow-hidden">
+        {/* Card Content */}
+        <div>
+          {/* Image Container */}
+          <div className="relative overflow-hidden h-48">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-full object-cover"
+            />
+            
+            {/* Overlay Elements */}
+            <div className="absolute top-4 left-4 bg-gold text-coffee-brown px-2 py-1 rounded-full text-sm font-semibold">
+              {product.category}
+            </div>
+            
+            <div className="absolute top-4 right-4 flex items-center space-x-1 bg-white/90 px-2 py-1 rounded-full">
+              <Star className="h-4 w-4 fill-gold text-gold" />
+              <span className="text-sm font-semibold">{product.rating}</span>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="p-6">
+            <h3 className="text-xl font-bold text-coffee-brown mb-2 font-playfair">
+              {product.name}
+            </h3>
+            <p className="text-coffee-dark text-sm mb-4 line-clamp-2">
+              {product.description}
+            </p>
+            
+            {/* Price */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center space-x-2">
+                <span className="text-2xl font-bold text-coffee-brown">
+                  ${product.price}
+                </span>
+                {product.originalPrice && (
+                  <span className="text-lg text-gray-500 line-through">
+                    ${product.originalPrice}
+                  </span>
+                )}
+              </div>
+            </div>
+            
+            {/* Add to Cart Button */}
+            <Button 
+              className="w-full bg-coffee-brown hover:bg-coffee-dark text-cream transition-all duration-300"
+              onClick={(e) => {
+                e.stopPropagation();
+                onAddToCart(product);
+              }}
+            >
+              <div className="flex items-center justify-center">
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Add to Cart
+              </div>
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Client-side interactive version
   return (
     <motion.div
       ref={ref}
