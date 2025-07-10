@@ -15,6 +15,13 @@ import { CoffeeCustomizer } from '@/components/interactive/CoffeeCustomizer';
 import { VirtualTour } from '@/components/interactive/VirtualTour';
 import { SteamParticleSystem } from '@/components/animations/SteamParticleSystem';
 import { CoffeeStainEffect } from '@/components/animations/CoffeeStainEffect';
+import { AdvancedBrewingAnimation } from '@/components/advanced/AdvancedBrewingAnimation';
+import { GestureControls } from '@/components/advanced/GestureControls';
+import { WebGL3DCoffee } from '@/components/advanced/WebGL3DCoffee';
+import { AdvancedAIRecommendations } from '@/components/advanced/AdvancedAIRecommendations';
+import { ImmersiveAudioExperience } from '@/components/advanced/ImmersiveAudioExperience';
+import { PerformanceMonitor } from '@/components/advanced/PerformanceMonitor';
+import { Navigation } from '@/components/Navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -112,6 +119,10 @@ export default function Home() {
       </section>
       
       <section className="scroll-section">
+        <AdvancedAIRecommendations />
+      </section>
+      
+      <section className="scroll-section">
         <CoffeeCustomizer />
       </section>
       
@@ -120,12 +131,35 @@ export default function Home() {
       </section>
       
       <section className="scroll-section">
+        <AdvancedBrewingAnimation />
+      </section>
+      
+      <section className="scroll-section">
+        <WebGL3DCoffee />
+      </section>
+      
+      <section className="scroll-section">
+        <GestureControls onGesture={(gesture) => console.log('Gesture:', gesture)} />
+      </section>
+      
+      <section className="scroll-section">
         <VirtualTour />
+      </section>
+      
+      <section className="scroll-section">
+        <ImmersiveAudioExperience />
+      </section>
+      
+      <section className="scroll-section">
+        <PerformanceMonitor />
       </section>
       
       <section className="scroll-section">
         <ContactSection />
       </section>
+      
+      {/* Navigation Component */}
+      <Navigation />
     </div>
   );
 }
