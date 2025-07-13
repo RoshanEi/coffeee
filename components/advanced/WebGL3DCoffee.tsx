@@ -22,6 +22,8 @@ export function WebGL3DCoffee() {
 
   // Vertex shader source
   const vertexShaderSource = `
+    precision mediump float;
+    
     attribute vec3 aPosition;
     attribute vec3 aNormal;
     attribute vec2 aTexCoord;
