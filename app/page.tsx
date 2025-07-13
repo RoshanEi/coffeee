@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -24,7 +22,7 @@ import { PerformanceMonitor } from '@/components/advanced/PerformanceMonitor';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Home() {
+export default function Home({ searchParams }: { searchParams?: { [key: string]: string | string[] | undefined } }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
